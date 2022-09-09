@@ -1,5 +1,4 @@
 #include "linkedlist.h"
-#include <stdio.h>
 
 struct LinkedList* LinkedListConstructor()
 {
@@ -110,6 +109,8 @@ void append(struct LinkedList* linked_list, int index, int data)
 
 void delete(struct LinkedList* linked_list, int index)
 {
+    assert(linked_list != NULL && index >= 0 && index <= linked_list - 1);
+
     struct Node* temp = linked_list->head;
 
     if (index == 0)
@@ -143,6 +144,8 @@ void delete(struct LinkedList* linked_list, int index)
 
 void ConvertToDoublyLinkedList(struct LinkedList* linked_list)
 {
+    assert(linked_list != NULL);
+
     if (linked_list->isDoublyLinked == 1)
     {
         return;
@@ -161,6 +164,8 @@ void ConvertToDoublyLinkedList(struct LinkedList* linked_list)
 
 void printList(struct LinkedList* linked_list)
 {
+    assert(linked_list != NULL);
+
     struct Node* temp = linked_list->head;
 
     for (int i = 0; i < linked_list->length; i++)
