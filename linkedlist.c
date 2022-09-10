@@ -26,7 +26,7 @@ void LinkedListDestructor(struct LinkedList* linked_list)
     }
 
     struct Node* temp;
-    while (linked_list->head != NULL) /* Copying head to temp. Then after moving head to tne next node, temp is freed. */
+    while (linked_list->head != NULL) /* Copying head to temp. Then after moving head to the next node, temp is freed. */
     {
         temp = linked_list->head;
         linked_list->head = linked_list->head->next;
@@ -109,7 +109,7 @@ void append(struct LinkedList* linked_list, int index, int data)
 
 void delete(struct LinkedList* linked_list, int index)
 {
-    assert(linked_list != NULL && index >= 0 && index <= linked_list - 1);
+    assert(linked_list != NULL && index >= 0 && index <= linked_list->length - 1);
 
     struct Node* temp = linked_list->head;
 
@@ -162,6 +162,21 @@ void ConvertToDoublyLinkedList(struct LinkedList* linked_list)
     linked_list->isDoublyLinked = 1;
 }
 
+void ConvertToSinglyLinkedList(struct LinkedList* linked_list)
+{
+    assert(linked_list != NULL);
+
+    struct Node* node = linked_list->head;
+
+    for (int i = 0; i < linked_list->length - 1; i++)
+    {
+        node->next->previous = NULL;
+        node = node->next;
+    }
+
+    linked_list->isDoublyLinked = 0;
+}
+
 void printList(struct LinkedList* linked_list)
 {
     assert(linked_list != NULL);
@@ -201,6 +216,9 @@ void main()
     append(ll, 1, 3);
     append(ll, 1, 4);
     
+    printList(ll);
+
+    ConvertToSinglyLinkedList(ll);
     printList(ll);
     printf("%d\n", ll->tail->data);
     LinkedListDestructor(ll);
