@@ -37,6 +37,9 @@ void LinkedListDestructor(struct LinkedList* linked_list)
     linked_list->isDoublyLinked = 0;
 
     linked_list->head = linked_list->tail = NULL;
+
+    free(linked_list);
+    linked_list = NULL;
 }
 
 void append(struct LinkedList* linked_list, int index, int data)
@@ -203,7 +206,7 @@ void printList(struct LinkedList* linked_list)
     }    
 }
 
-void main()
+/*void main()
 {
     struct LinkedList* ll = LinkedListConstructor();
 
@@ -222,4 +225,4 @@ void main()
     printList(ll);
     printf("%d\n", ll->tail->data);
     LinkedListDestructor(ll);
-}
+}*/

@@ -32,6 +32,9 @@ void StackDestructor(struct Stack* stack)
         stack->top = temp->next;
         NodeDestructor(temp);
     }
+
+    free(stack);
+    stack = NULL;
 }
 
 void push(struct Stack* stack, int data)
