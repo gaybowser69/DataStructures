@@ -1,5 +1,4 @@
 #include "linkedlist.h"
-#include <stdio.h>
 
 struct LinkedList* LinkedListConstructor()
 {
@@ -27,7 +26,7 @@ void LinkedListDestructor(struct LinkedList* linked_list)
     }
 
     struct Node* temp;
-    while (linked_list->head != NULL) /* Copying head to temp. Then after moving head to tne next node, temp is freed. */
+    while (linked_list->head != NULL) /* Copying head to temp. Then after moving head to the next node, temp is freed. */
     {
         temp = linked_list->head;
         linked_list->head = linked_list->head->next;
@@ -38,6 +37,9 @@ void LinkedListDestructor(struct LinkedList* linked_list)
     linked_list->isDoublyLinked = 0;
 
     linked_list->head = linked_list->tail = NULL;
+
+    free(linked_list);
+    linked_list = NULL;
 }
 
 void append(struct LinkedList* linked_list, int index, int data)
@@ -110,6 +112,8 @@ void append(struct LinkedList* linked_list, int index, int data)
 
 void delete(struct LinkedList* linked_list, int index)
 {
+    assert(linked_list != NULL && index >= 0 && index <= linked_list->length - 1);
+
     struct Node* temp = linked_list->head;
 
     if (index == 0)
@@ -143,6 +147,8 @@ void delete(struct LinkedList* linked_list, int index)
 
 void ConvertToDoublyLinkedList(struct LinkedList* linked_list)
 {
+    assert(linked_list != NULL);
+
     if (linked_list->isDoublyLinked == 1)
     {
         return;
@@ -159,8 +165,25 @@ void ConvertToDoublyLinkedList(struct LinkedList* linked_list)
     linked_list->isDoublyLinked = 1;
 }
 
+void ConvertToSinglyLinkedList(struct LinkedList* linked_list)
+{
+    assert(linked_list != NULL);
+
+    struct Node* node = linked_list->head;
+
+    for (int i = 0; i < linked_list->length - 1; i++)
+    {
+        node->next->previous = NULL;
+        node = node->next;
+    }
+
+    linked_list->isDoublyLinked = 0;
+}
+
 void printList(struct LinkedList* linked_list)
 {
+    assert(linked_list != NULL);
+
     struct Node* temp = linked_list->head;
 
     for (int i = 0; i < linked_list->length; i++)
@@ -183,6 +206,7 @@ void printList(struct LinkedList* linked_list)
     }    
 }
 
+<<<<<<< HEAD
 
 int LinearSearchOnLinkedList(struct LinkedList* linked_list , int search_element){
     struct Node* temp = linked_list->head;
@@ -219,6 +243,9 @@ void ReverseLinkedList(struct LinkedList* linked_list){
 
 
 void main()
+=======
+/*void main()
+>>>>>>> 83a81bd307f22c293b7bbc73410a106b3a91209d
 {
     struct LinkedList* ll = LinkedListConstructor();
 
@@ -234,6 +261,9 @@ void main()
     printf("*%d*\n ",LinearSearchOnLinkedList(ll,4));
     ReverseLinkedList(ll);
     printList(ll);
+
+    ConvertToSinglyLinkedList(ll);
+    printList(ll);
     printf("%d\n", ll->tail->data);
     LinkedListDestructor(ll);
-}
+}*/
