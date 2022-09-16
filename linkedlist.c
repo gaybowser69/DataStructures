@@ -183,19 +183,56 @@ void printList(struct LinkedList* linked_list)
     }    
 }
 
+
+int LinearSearchOnLinkedList(struct LinkedList* linked_list , int search_element){
+    struct Node* temp = linked_list->head;
+    for(int i=0;i<linked_list->length;i++){
+        if(temp->data == search_element){
+            return i;
+        }
+        temp = temp->next;
+    }
+    return -1;
+}
+
+void ReverseLinkedList(struct LinkedList* linked_list){
+    struct Node *current_node = linked_list->head;
+    struct Node *last_node =NULL;
+    struct Node *next1 = current_node;
+    struct Node *another_head = linked_list->head;
+
+    while (current_node != linked_list->tail)
+    {
+        next1 = current_node->next;
+        current_node->next=last_node;
+        last_node= current_node ;
+        current_node = next1;
+        
+    }
+
+    current_node->next = last_node;
+    last_node = current_node;
+
+    linked_list->head = last_node;
+    linked_list->tail = another_head;
+}
+
+
 void main()
 {
     struct LinkedList* ll = LinkedListConstructor();
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 12; i < 15; i++)
     {
-        append(ll, i, i);
+        append(ll, ll->length, i);
     }
 
-    ConvertToDoublyLinkedList(ll);
-    append(ll, 1, 3);
-    append(ll, 1, 4);
-    
+    //ConvertToDoublyLinkedList(ll);
+    //append(ll, 1, 3);
+    //append(ll, 1, 4);
+    printList(ll);
+    printf("*%d*\n ",LinearSearchOnLinkedList(ll,4));
+    ReverseLinkedList(ll);
     printList(ll);
     printf("%d\n", ll->tail->data);
     LinkedListDestructor(ll);
