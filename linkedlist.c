@@ -206,7 +206,6 @@ void printList(struct LinkedList* linked_list)
     }    
 }
 
-<<<<<<< HEAD
 
 int LinearSearchOnLinkedList(struct LinkedList* linked_list , int search_element){
     struct Node* temp = linked_list->head;
@@ -242,10 +241,8 @@ void ReverseLinkedList(struct LinkedList* linked_list){
 }
 
 
-void main()
-=======
+void main(){}
 /*void main()
->>>>>>> 83a81bd307f22c293b7bbc73410a106b3a91209d
 {
     struct LinkedList* ll = LinkedListConstructor();
 
