@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <stdbool.h>
 #include <assert.h>
 
 #ifndef GRAPH_H
@@ -31,7 +30,7 @@ void DestroyAdjMatrix(struct Graph* graph);
 
 void GenerateAdjList(struct Graph* graph); //todo
 
-bool hasEdge(struct Graph* graph, int src, int dest);
+int hasEdge(struct Graph* graph, int src, int dest);
 void makeEdge(struct Graph* graph, int src, int dest);
 void deleteEdge(struct Graph* graph, int src, int dest);
 
