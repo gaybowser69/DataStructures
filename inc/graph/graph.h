@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <assert.h>
 
-struct Node
+struct GNode
 {
     int data;
 };
@@ -17,12 +17,12 @@ struct Edge
 struct Graph
 {
     int V;
-    struct Node** nodeList; 
+    struct GNode** nodeList; 
     struct Edge* edge;
 };
 
-struct Node* NodeConstructor(int data);
-void NodeDestructor(struct Node* node);
+struct GNode* GNodeConstructor(int data);
+void GNodeDestructor(struct GNode* node);
 
 struct Graph* GraphConstructor(unsigned int V);
 void GraphDestructor(struct Graph* graph);
