@@ -1,8 +1,8 @@
 #include "graph.h"
 
-struct Node* NodeConstructor(int data)
+struct GNode* GNodeConstructor(int data)
 {
-    struct Node* node = malloc(sizeof(struct Node));
+    struct GNode* node = malloc(sizeof(struct GNode));
 
     if (node == NULL)
     {
@@ -14,7 +14,7 @@ struct Node* NodeConstructor(int data)
     return node;
 }
 
-void NodeDestructor(struct Node* node)
+void GNodeDestructor(struct GNode* node)
 {
     if (node == NULL)
     {
@@ -37,7 +37,7 @@ struct Graph* GraphConstructor(unsigned int V)
 
     graph->V = V;
 
-    graph->nodeList = calloc(sizeof(struct Node*), graph->V);
+    graph->nodeList = calloc(sizeof(struct GNode*), graph->V);
 
     if(graph->nodeList == NULL)
     {
@@ -47,7 +47,7 @@ struct Graph* GraphConstructor(unsigned int V)
 
     for (int i = 0; i < graph->V; i++)
     {
-        graph->nodeList[i] = NodeConstructor(0);
+        graph->nodeList[i] = GNodeConstructor(0);
 
         if (graph->nodeList[i] == NULL)
         {
@@ -70,7 +70,7 @@ void GraphDestructor(struct Graph* graph)
     
     for (int i = 0; i < graph->V; i++)
     {
-        NodeDestructor(graph->nodeList[i]);
+        GNodeDestructor(graph->nodeList[i]);
     }
 
     free(graph->nodeList);
@@ -211,15 +211,4 @@ void printGraph(struct Graph* graph)
             }
         }
     }
-}
-
-int main()
-{
-    struct Graph* g = GraphConstructor(4);
-    makeEdge(g, 1, 0);
-    makeEdge(g, 3, 2);
-   
-    printGraph(g);
-
-    GraphDestructor(g);    
 }
