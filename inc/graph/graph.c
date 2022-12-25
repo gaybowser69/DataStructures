@@ -129,7 +129,7 @@ void GenerateAdjList(struct Graph* graph)
     //todo
 }
 
-bool hasEdge(struct Graph* graph, int src, int dest)
+int hasEdge(struct Graph* graph, int src, int dest)
 {
     assert(graph != NULL);
     assert(src >= 0 && src < graph->V && dest >= 0 && dest < graph->V && src != dest);
