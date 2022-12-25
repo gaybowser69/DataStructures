@@ -51,5 +51,12 @@ void main()
     enQ(q, 2);
     printf("%d\n", q->front->next->data);
     QueueDestructor(q);
-    
+
+    struct Graph* g = GraphConstructor(5);
+    makeEdge(g, 2, 4);
+    makeEdge(g, 1, 3);
+    printGraph(g);
+    deleteEdge(g, 1, 3);
+    printGraph(g);
+    GraphDestructor(g);    
 }
