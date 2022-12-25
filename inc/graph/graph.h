@@ -3,6 +3,9 @@
 #include <stdbool.h>
 #include <assert.h>
 
+#ifndef GRAPH_H
+#define GRAPH_H
+
 struct GNode
 {
     int data;
@@ -39,3 +42,5 @@ void deleteEdge(struct Graph* graph, int src, int dest);
 
 void printAdjMatrix(struct Graph* graph);
 void printGraph(struct Graph* graph);
+
+#endif
