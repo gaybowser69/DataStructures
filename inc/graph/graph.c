@@ -57,8 +57,6 @@ struct Graph* GraphConstructor(unsigned int V)
         }
     }
 
-    graph->edge = malloc(sizeof(struct Edge));
-
     GenerateAdjMatrix(graph);
 
     return graph;
@@ -79,9 +77,6 @@ void GraphDestructor(struct Graph* graph)
     DestroyAdjMatrix(graph);
     //DestroyAdjList(graph); //todo
 
-    free(graph->edge);
-    graph->edge = NULL;
-
     graph->V = 0;
     free(graph);
     graph == NULL;
@@ -91,18 +86,18 @@ void GenerateAdjMatrix(struct Graph* graph)
 {
     assert(graph != NULL);
 
-    graph->edge->adjMatrix = calloc(sizeof(int*), graph->V);
+    graph->adjMatrix = calloc(sizeof(int*), graph->V);
 
-    if(graph->edge->adjMatrix == NULL)
+    if(graph->adjMatrix == NULL)
     {
         return;
     }
 
     for (int i = 0; i < graph->V; i++)
     {
-        graph->edge->adjMatrix[i] = calloc(sizeof(int), graph->V);
+        graph->adjMatrix[i] = calloc(sizeof(int), graph->V);
 
-        if (graph->edge->adjMatrix[i] == NULL)
+        if (graph->adjMatrix[i] == NULL)
         {
             return;
         }
@@ -113,19 +108,19 @@ void DestroyAdjMatrix(struct Graph* graph)
 {
     assert(graph != NULL);
 
-    if(graph->edge->adjMatrix == NULL)
+    if(graph->adjMatrix == NULL)
     {
         return;
     }
 
     for (int i = 0; i < graph->V; i++)
     {
-        free(graph->edge->adjMatrix[i]);
-        graph->edge->adjMatrix[i] = NULL;
+        free(graph->adjMatrix[i]);
+        graph->adjMatrix[i] = NULL;
     }
 
-    free(graph->edge->adjMatrix);
-    graph->edge->adjMatrix = NULL;
+    free(graph->adjMatrix);
+    graph->adjMatrix = NULL;
 }
 
 void GenerateAdjList(struct Graph* graph)
@@ -139,12 +134,12 @@ bool hasEdge(struct Graph* graph, int src, int dest)
     assert(graph != NULL);
     assert(src >= 0 && src < graph->V && dest >= 0 && dest < graph->V && src != dest);
 
-    if (graph->edge->adjMatrix[src][dest] == true)
+    if (graph->adjMatrix[src][dest] != 0)
     {      
-        return true;
+        return 1;
     }
 
-    return false;
+    return 0;
 }
 
 void makeEdge(struct Graph* graph, int src, int dest)
@@ -152,9 +147,9 @@ void makeEdge(struct Graph* graph, int src, int dest)
     assert(graph != NULL);
     assert(src >= 0 && src < graph->V && dest >= 0 && dest < graph->V && src != dest);
 
-    if (hasEdge(graph, src, dest) == false)
+    if (hasEdge(graph, src, dest) == 0)
     {
-        graph->edge->adjMatrix[src][dest] = true;   
+        graph->adjMatrix[src][dest] = 1;   
     }
 }
 
@@ -163,9 +158,9 @@ void deleteEdge(struct Graph* graph, int src, int dest)
     assert(graph != NULL);
     assert(src >= 0 && src < graph->V && dest >= 0 && dest < graph->V && src != dest);
 
-    if (hasEdge(graph, src, dest) == true)
+    if (hasEdge(graph, src, dest) != 0)
     {
-        graph->edge->adjMatrix[src][dest] = false;   
+        graph->adjMatrix[src][dest] = 0;   
     }
 }
 
@@ -173,7 +168,7 @@ void printAdjMatrix(struct Graph* graph)
 {
     assert(graph != NULL);
 
-    if(graph->edge->adjMatrix == NULL)
+    if(graph->adjMatrix == NULL)
     {
         return;
     }
@@ -182,7 +177,7 @@ void printAdjMatrix(struct Graph* graph)
     {
         for (int j = 0; j < graph->V; j++)
         {
-            printf("%d ", graph->edge->adjMatrix[i][j]);
+            printf("%d ", graph->adjMatrix[i][j]);
         }
 
         printf("\n");
@@ -193,7 +188,7 @@ void printGraph(struct Graph* graph)
 {
     assert(graph != NULL);
     
-    if(graph->edge->adjMatrix != NULL)
+    if(graph->adjMatrix != NULL)
     {
         for (int i = 0; i < graph->V; i++)
         {
@@ -204,7 +199,7 @@ void printGraph(struct Graph* graph)
                     continue;
                 }
 
-                if (hasEdge(graph, i, j) == true)
+                if (hasEdge(graph, i, j) == 1)
                 {
                     printf("%d --> %d\n", i, j);
                 }
