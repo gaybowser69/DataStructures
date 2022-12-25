@@ -35,6 +35,9 @@ bool hasEdge(struct Graph* graph, int src, int dest);
 void makeEdge(struct Graph* graph, int src, int dest);
 void deleteEdge(struct Graph* graph, int src, int dest);
 
+void changeWeight(struct Graph* graph, int src, int dest, float weight);
+float getWeight(struct Graph* graph, int src, int dest);
+
 void printAdjMatrix(struct Graph* graph);
 void printGraph(struct Graph* graph);
 

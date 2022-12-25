@@ -164,6 +164,28 @@ void deleteEdge(struct Graph* graph, int src, int dest)
     }
 }
 
+void changeWeight(struct Graph* graph, int src, int dest, float weight)
+{
+    assert(graph != NULL);
+    assert(src >= 0 && src < graph->V && dest >= 0 && dest < graph->V && src != dest);
+
+    if (hasEdge(graph, src, dest) != 0)
+    {
+        graph->adjMatrix[src][dest] = weight;
+    }
+}
+
+float getWeight(struct Graph* graph, int src, int dest)
+{
+    assert(graph != NULL);
+    assert(src >= 0 && src < graph->V && dest >= 0 && dest < graph->V && src != dest);
+
+    if (hasEdge(graph, src, dest) != 0)
+    {
+        return graph->adjMatrix[src][dest];
+    }
+}
+
 void printAdjMatrix(struct Graph* graph)
 {
     assert(graph != NULL);
@@ -201,7 +223,7 @@ void printGraph(struct Graph* graph)
 
                 if (hasEdge(graph, i, j) == 1)
                 {
-                    printf("%d --> %d\n", i, j);
+                    printf("%d --> %d, Weight: %.2f\n", i, j, getWeight(graph, i, j));
                 }
             }
         }
