@@ -11,17 +11,12 @@ struct GNode
     int data;
 };
 
-struct Edge
-{
-    bool** adjMatrix; //Stores all neighbours
-    int** adjList; //Stores the neighbours for the node at the nodelist index
-};
-
 struct Graph
 {
     int V;
     struct GNode** nodeList; 
-    struct Edge* edge;
+    unsigned int** adjMatrix;
+    int** adjList; //Stores the neighbours for the node at the nodelist index
 };
 
 struct GNode* GNodeConstructor(int data);
